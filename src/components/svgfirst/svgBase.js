@@ -66,7 +66,12 @@ class SvgBase extends Component {
         return `M20,320 L400,400 M40,320 H400 M60,320 V400`
       })
       .attr("stroke", "blue")
-      .attr("stroke-width", 4)
+      .attr("stroke-width", 4);
+
+    //画一个五角星
+    let fiveData = [{ x: 20, y: 420 }, { x: 50, y: 330 }, { x: 80, y: 420 }, { x: 20, y: 330 }, { x: 80, y: 330 }];
+    let fiveG = me._svg.append("polygon").attr("d", function (s, i) { console.log(s) });
+
   }
 
   render() {

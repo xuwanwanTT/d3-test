@@ -48,10 +48,9 @@ class BaseBar extends Component {
 
     let xScale = d3.scaleLinear()
       .domain([0, data.length - 1])
-      .range([0, _x - 20])
+      .range([10, _x])
 
     let xAxis = d3.axisBottom().scale(xScale);
-    console.log(xAxis)
 
     let bar = _svg.selectAll("g")
       .data(data)
@@ -84,7 +83,7 @@ class BaseBar extends Component {
 
     _svg.append("g")
       .attr("class", "x-axis")
-      .attr("transform", `translate(0,${_y})`)
+      .attr("transform", `translate(0,${_y - 20})`)
       .call(xAxis);
   }
 

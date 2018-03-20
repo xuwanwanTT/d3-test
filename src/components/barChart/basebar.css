@@ -11,12 +11,12 @@
   padding-right: 10px;
 } */
 
-.axis text {
+.x-axis text {
   font: 10px sans-serif;
 }
 
-.axis path,
-.axis line {
+.x-axis path,
+.x-axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
