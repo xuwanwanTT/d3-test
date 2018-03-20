@@ -1,26 +1,35 @@
-import React, {Component} from 'react';
-import {HashRouter, Route} from 'react-router-dom';
+import React, { Component } from 'react';
+import { HashRouter, Route } from 'react-router-dom';
 import './App.css';
+
+/* introduce */
+import Introduce from './pages/introduce/introduce';
 /* tree */
 import Tree from './pages/tree/tree';
 /* line */
 import Line from './pages/line/line';
+/* bar */
+import Bar from './pages/bar/bar';
+/* pie */
+import Pie from './pages/pie/pie';
+/* svg图形 */
+import Svg from './pages/svgfirst/svgfirst';
 
 /* 模块 */
-const pages = [Tree, Line];
+const pages = [Introduce, Tree, Line, Bar, Pie, Svg];
 
 /* 导航名称 */
-const navNames = ['tree', 'line'];
+const navNames = ["introduce", "tree", "line", "bar", "pie", "svg"];
 
 /* paths */
-const paths = ['/', '/tree', '/line'];
+const paths = ["/", "/tree", "/line", "/bar", "/pie", "/svg"];
 
 class App extends Component {
   constructor() {
     super();
     let me = this;
     me.state = {
-      active:0
+      active: 0
     };
   }
 
@@ -53,11 +62,11 @@ class App extends Component {
               let page = pages[i];
               if (i === 0)
                 return (
-                  <Route key={`route-item-${i}`} exact path={t} component={page}/>
+                  <Route key={`route-item-${i}`} exact path={t} component={page} />
                 );
               else
                 return (
-                  <Route key={`route-item-${i}`} path={t} component={page}/>
+                  <Route key={`route-item-${i}`} path={t} component={page} />
                 )
             })
           }
@@ -74,15 +83,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // let href = window.location.href.split('/');
-    // let len = href.length - 1;
-    // let path = href[len];
-    // let active = paths.indexOf('/' + path);
-    // if (!active) active = 0;
-    // let storage = window.sessionStorage;
-    // storage.setItem('historyId', active);
-    // console.log(this.hashRef.history);
-    // console.log(href);
     let storage = window.sessionStorage;
     let active = Number(storage.getItem('historyId') || 0);
     this.setState({

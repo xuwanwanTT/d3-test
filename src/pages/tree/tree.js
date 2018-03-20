@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TreeChart from '../../components/treeChart/treechart';
+import Basetree from '../../components/treeChart/basetree';
 
 class Tree extends Component {
-  constructor(){
+  constructor() {
     super()
   };
 
@@ -13,16 +14,17 @@ class Tree extends Component {
     left: 80,
   }
 
-  render(){
+  render() {
     let me = this;
     return (
       <div>
         <TreeChart style={me.treeChart} ref="treeChartRef" />
+        <Basetree />
       </div>
     )
   };
 
-  componentDidMount(){};
+  componentDidMount() { };
 };
 
 export default Tree;
