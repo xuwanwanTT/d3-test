@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import "./svgbase.css";
 
 class SvgBase extends Component {
   constructor() {
@@ -69,9 +70,28 @@ class SvgBase extends Component {
       .attr("stroke-width", 4);
 
     //画一个五角星
-    let fiveData = [{ x: 20, y: 420 }, { x: 50, y: 330 }, { x: 80, y: 420 }, { x: 20, y: 330 }, { x: 80, y: 330 }];
-    let fiveG = me._svg.append("polygon").attr("d", function (s, i) { console.log(s) });
+    let starX = 30;
+    let starData = [{ x: .2 * starX, y: y }, { x: .8 * starX, y: y - 1.5 * starX }, { x: 1.4 * starX, y: y }, { x: 0, y: y - starX }, { x: 1.6 * starX, y: y - starX }];
+    let fiveG = me._svg.append("polygon")
+      .attr("class", "five-svg")
+      .attr("points", function (s, i) {
+        let str = '';
+        starData.forEach(s => {
+          str += `${s.x},${s.y} `
+        })
+        return str
+      })
+      .attr("fill", "transparent")
+      .attr("stroke", "red")
+      .attr("stroke-width", 2);
 
+    let fiveLen = document.querySelector(".five-svg").getTotalLength();
+    fiveG.attr("stroke-dasharray", fiveLen)
+      .attr("stroke-dashoffset", fiveLen)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(3000)
+      .attr("stroke-dashoffset", 0);
   }
 
   render() {
