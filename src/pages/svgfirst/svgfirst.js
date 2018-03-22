@@ -10,7 +10,7 @@ class SvgFirst extends Component {
     let me = this;
     return (
       <div>
-        <SvgBase width={900} height={600} />
+        <SvgBase width={1900} height={600} />
       </div>
     )
   }

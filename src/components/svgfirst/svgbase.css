@@ -1,1 +1,26 @@
+@keyframes ani {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
 
+.texts {
+  /* stroke-dasharray: 312; */
+}
+
+.lines {
+
+}
+
+.poly {
+  animation: ani 6s linear infinite;
+}
+
+.five-svg {
+  /* animation: ani 3s linear infinite alternate; */
+  animation: ani 6s linear infinite;
+}
+
+.cirstar {
+  /* transform: translate(0,552px); */
+}
