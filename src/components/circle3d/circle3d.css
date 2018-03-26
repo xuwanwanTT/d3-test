@@ -1,0 +1,52 @@
+@keyframes circle-img-ani {
+  100% {
+    transform: rotateY(360deg)
+  }
+}
+
+.circle-img-stage {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  perspective: 800px;
+
+}
+
+.circle-img-wrap {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+  animation: circle-img-ani 5s linear infinite;
+}
+
+.circle-img-3d {
+  position: absolute;
+  box-shadow: 0px 0px 8px #eee;
+}
+
+.circle-img-3d:nth-child(1) {
+  transform: rotateY(0deg) translateZ(200px);
+}
+
+.circle-img-3d:nth-child(2) {
+  transform: rotateY(60deg) translateZ(200px);
+}
+
+.circle-img-3d:nth-child(3) {
+  transform: rotateY(120deg) translateZ(200px);
+}
+
+.circle-img-3d:nth-child(4) {
+  transform: rotateY(180deg) translateZ(200px);
+}
+
+.circle-img-3d:nth-child(5) {
+  transform: rotateY(240deg) translateZ(200px);
+}
+
+.circle-img-3d:nth-child(6) {
+  transform: rotateY(300deg) translateZ(200px);
+}

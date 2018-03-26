@@ -1,0 +1,20 @@
+@keyframes ani-rotate {
+  100% {
+    transform:  rotateY(360deg) ;
+  }
+}
+
+/*perspective(600px) rotateZ(360deg)*/
+
+.svg-go-cir-wrap {
+  transform:  rotateY(0deg) ;
+  /* animation: ani-rotate 3s linear infinite; */
+}
+
+.svg-go-circle {
+  box-shadow: 5px 5px 5px red;
+}
+
+.svg-go-star {
+  animation: ani 3s linear infinite;
+}
