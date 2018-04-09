@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PieArea from '../../components/piechart/pie-area';
 
 class Pie extends Component {
   constructor() {
@@ -9,7 +10,7 @@ class Pie extends Component {
     let me = this;
     return (
       <div>
-        Pie
+        <PieArea />
       </div>
     )
   }

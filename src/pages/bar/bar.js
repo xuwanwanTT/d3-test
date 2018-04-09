@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BaseBar from "../../components/barChart/basebar";
+import ShapeBar from "../../components/barChart/shapebar";
 
-class Bar extends Component {
+  class Bar extends Component {
   constructor() {
     super()
   }
@@ -11,6 +12,7 @@ class Bar extends Component {
     return (
       <div>
         <BaseBar />
+        <ShapeBar/>
       </div>
     )
   }
