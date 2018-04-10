@@ -31,6 +31,9 @@ class Api {
       return res.data
     });
   }
+  cancel() {
+    console.log('cancel');
+  }
 };
 
 class ApiBuilder {
