@@ -14,15 +14,17 @@ import Bar from './pages/bar/bar';
 import Pie from './pages/pie/pie';
 /* svg图形 */
 import Svg from './pages/svgfirst/svgfirst';
+/* 3d */
+import Three from './pages/3d/3d';
 
 /* 模块 */
-const pages = [Introduce, Tree, Line, Bar, Pie, Svg];
+const pages = [Introduce, Tree, Line, Bar, Pie, Svg, Three];
 
 /* 导航名称 */
-const navNames = ["introduce", "tree", "line", "bar", "pie", "svg"];
+const navNames = ["introduce", "tree", "line", "bar", "pie", "svg", '3d'];
 
 /* paths */
-const paths = ["/", "/tree", "/line", "/bar", "/pie", "/svg"];
+const paths = ["/", "/tree", "/line", "/bar", "/pie", "/svg", '/3d'];
 
 class App extends Component {
   constructor() {
