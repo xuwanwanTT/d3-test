@@ -17,6 +17,17 @@ class Introduce extends Component {
     }));
   }
 
+  ajax() {
+    var xhr = new XMLHttpRequest()
+    xhr.open('get', '', true)
+    xhr.send()
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(JSON.parse(xhr.responseText))
+      }
+    }
+  }
+
   _clearTokens() {
     console.log(this._tokens[0])
     // this._tokens.forEach(token => token.cancel());
