@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from "../../api/test"
+import Dialog from '../../components/common/dialog/Dialog';
 
 class Introduce extends Component {
   constructor() {
@@ -32,16 +33,24 @@ class Introduce extends Component {
     console.log(this._tokens[0])
     // this._tokens.forEach(token => token.cancel());
     this._tokens = [];
-  };
+  }
 
   componentWillUnmount() {
     this._clearTokens();
   }
 
+  show() {
+    this.refs.dialogRef.open();
+  }
+
   render() {
+    let me = this;
     return (
       <div>
-        <h1>Hello world !</h1>
+        <h1 onClick={this.show.bind(this)}>Hello world !</h1>
+        <Dialog width={1200} height={800} title={'这是标题'} ref={'dialogRef'}>
+        <h1>hello world</h1>
+        </Dialog>
       </div >
     );
   }
