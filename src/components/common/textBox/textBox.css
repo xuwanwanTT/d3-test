@@ -1,0 +1,20 @@
+.text-input-box {
+  position: absolute;
+  display: flex;
+  color: #fff;
+}
+
+.text-input-box > textarea {
+  background-color:transparent;
+  resize: none;
+  outline:0;
+  border: 1px solid rgba(1,252,252,1);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  padding-left: 10px;
+  margin-top: 2.5px;
+  margin-left: 20px;
+  flex: 1;
+  padding-top: 5px
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from "../../api/test"
 import Dialog from '../../components/common/dialog/Dialog';
+import TextBox from '../../components/common/textBox/TextBox';
 
 class Introduce extends Component {
   constructor() {
@@ -49,8 +50,9 @@ class Introduce extends Component {
       <div>
         <h1 onClick={this.show.bind(this)}>Hello world !</h1>
         <Dialog width={1200} height={800} title={'这是标题'} ref={'dialogRef'}>
-        <h1>hello world</h1>
+          <h1>hello world</h1>
         </Dialog>
+        <TextBox title={"hahahaha"} type={1} width={1300} height={400} ref={'textBoxRef'} />
       </div >
     );
   }
