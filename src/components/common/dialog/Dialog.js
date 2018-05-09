@@ -62,7 +62,8 @@ class Dialog extends React.Component {
           transform: 'translate(-50%,-50%)',
           borderRight: '1px solid rgba(1,208,213,.8)',
           backgroundImage: `url(${bgt})`,
-          backgroundSize: `100% calc(100% - 25px)`
+          backgroundSize: `100% calc(100% - 24px)`,
+          backgroundRepeat: 'no-repeat'
         }} className={'dialog-common-wrap'}>
           <div className={'dialog-commom-borderl'}></div>
           <div className={'dialog-commom-borderb'}></div>

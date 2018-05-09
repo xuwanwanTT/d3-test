@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import * as api from "../../api/test"
 import Dialog from '../../components/common/dialog/Dialog';
 import TextBox from '../../components/common/textBox/TextBox';
+import ListRow from '../../components/common/list/ListRow';
+import ListColumn from '../../components/common/list/ListColumn';
+import Time from 'rc-calendar';
+import Calendar from '../../components/common/calendar/Calendar';
 
 class Introduce extends Component {
   constructor() {
@@ -52,7 +56,33 @@ class Introduce extends Component {
         <Dialog width={1200} height={800} title={'这是标题'} ref={'dialogRef'}>
           <h1>hello world</h1>
         </Dialog>
-        <TextBox title={"hahahaha"} type={1} width={1300} height={400} ref={'textBoxRef'} />
+        {/* <TextBox title={"hahahaha"} type={1} width={1300} height={400} ref={'textBoxRef'} /> */}
+
+        <ListColumn width={300} top={200} left={20}>
+          {[['aa', 'bb', 'cc'], ['dd', 'ee', 'ff'], ['gg', 'hh', 'ii']].map((s, i) => {
+            return <ListRow key={i}>
+              {s.map((s, i) => {
+                return <div key={i}>{s}</div>
+              })}
+            </ListRow>
+          })}
+        </ListColumn>
+
+        <Time style={{
+          position: 'absolute',
+          top: 100,
+          left: 100,
+          backgroundColor: 'red'
+        }} />
+
+        <Calendar style={{
+          width: 160,
+          height: 35,
+          left: 200,
+          top: 500,
+          zIndex: me.props.zIndex
+        }}
+          defaultDate={'2018-06-24'} />
       </div >
     );
   }
