@@ -4,8 +4,7 @@
   height: 100%;
   position: absolute;
   top: 0;
-  /* left: 0; */
-  z-index: 999;
+  z-index: 10;
 }
 
 .hubei-select-changed {
@@ -51,27 +50,52 @@
   transform: scale(0);
 }
 
-.time-select-box ul {
+.time-select-scroll-wrap {
+  width: 25%;
+  height: calc(100% - 50px);
+  overflow: hidden;
   position: absolute;
-  top: 35px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 0 15px;
+  left: 25%;
+  top: 34px;
+  color: #bfe9ff;
+}
+
+.time-select-scroll-wrap > .time-select-scroll {
+  height: 100%;
+  overflow-Y: auto;
+  overflow-X: hidden;
 }
 
 .time-select-box ul li {
-  flex: 1 1 28px;
-  height: 28px;
-  margin-bottom: 5px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.time-select-month,
+.time-select-day {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  line-height: 28px;
+  justify-content: center;
+}
+
+.time-select-text-month,
+.time-select-text-day {
+  width: 25%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 34px;
+  left: 5%;
   color: #bfe9ff;
-  cursor: pointer;
-  border-radius: 14px;
+  font-size: 14px
+}
+
+.time-select-text-day {
+  left: 55%;
 }
 
 .time-select-box ul li:hover {
@@ -119,6 +143,7 @@
   transform-origin: 0 0;
   transform: scale(1);
   transition: transform 300ms;
+  overflow: hidden;
 }
 
 .time-select-box-hide {
