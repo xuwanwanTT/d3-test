@@ -44,7 +44,10 @@ class ShapeBar extends Component {
       series: {
         name: "xxx",
         type: 'pictorialBar',
-        symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+        // symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+
+        symbol: 'path://M111.554,265h-0.127A196.181,196.181,0,0,1,86,357h50.989A196.185,196.185,0,0,1,111.554,265Z',
+
 
         data: [{
           value: 130, label: {
