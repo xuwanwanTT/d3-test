@@ -12,10 +12,7 @@ body, html {
 #root {
   width: 100%;
   height: 100%;
-  background-image: url("/static/image/bg.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-color: rebeccapurple;
 }
 
 .nav-box {

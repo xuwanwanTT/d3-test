@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
+import { arrow } from '../fn/Fn';
 
 const pi = 2 * Math.PI;
 const sin = Math.sin;
@@ -18,6 +19,8 @@ class Page extends Component {
     let svg = d3.select(me.refs.pageRef).append("svg")
       .attr("width", x)
       .attr("height", y);
+    //箭头
+    arrow(svg);
 
     //普通坐标轴--连续
     let yScale = d3.scaleLinear()
@@ -37,17 +40,33 @@ class Page extends Component {
       .call(yAxis);
 
     //x轴留白--非连续
-    let xScaleB = d3.scaleBand()
-      .domain(['小明', '小红', '小刚'])
-      .range([0, 200]);
-    let xAxisB = d3.axisBottom().scale(xScaleB);
     let axisB = svg.append('g');
-    axisB.append('g')
+    let xScaleB = d3.scaleLinear()
+      .domain([0, 100])
+      .range([0, 200]);
+    let xAxisB = d3.axisBottom()
+      .scale(xScaleB)
+      .ticks(6)
+      .tickFormat(function (d) { return d + '%'; })
+      .tickSize(0)
+      .tickPadding(6);
+    let xB = axisB.append('g')
       .attr('transform', 'translate(350 300)')
       .call(xAxisB);
-    axisB.append('g')
+    xB.select('path').attr('marker-end', 'url(#svg-arrow)');
+
+    let yScaleB = d3.scaleBand()
+      .domain(['柱子1', '柱子2', '柱子3'])
+      .range([250, 0]);
+    let yAxisB = d3.axisLeft().scale(yScaleB)
+      .tickSize(0)
+      .tickPadding(6);
+    let yB = axisB.append('g')
       .attr('transform', 'translate(350 50)')
-      .call(yAxis);
+      .call(yAxisB);
+    yB.select('path').attr('marker-end', 'url(#svg-arrow)');
+
+    console.log(yScaleB('柱子2'));
   }
 
   render() {

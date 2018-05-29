@@ -228,7 +228,7 @@ class Select extends React.Component {
     let me = this;
     let list = me.createArr(12);
     return list.map((s, i) => {
-      return <li className={me.state.monthActive == i + 1 ? 'active' : ''} onClick={me.selectMonth.bind(this, i + 1)}>{i + 1}</li>
+      return <li key={i} className={me.state.monthActive == i + 1 ? 'active' : ''} onClick={me.selectMonth.bind(this, i + 1)}>{i + 1}</li>
     });
   }
 
@@ -237,7 +237,7 @@ class Select extends React.Component {
     me.day = day;
     let list = me.createArr(day);
     return list.map((s, i) => {
-      return <li className={me.state.dayActive == i + 1 ? 'active' : ''} onClick={me.selectDay.bind(this, i + 1, day)}>{i + 1}</li>
+      return <li key={i} className={me.state.dayActive == i + 1 ? 'active' : ''} onClick={me.selectDay.bind(this, i + 1, day)}>{i + 1}</li>
     });
   }
 

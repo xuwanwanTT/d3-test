@@ -4,6 +4,8 @@ import './App.css';
 
 /* introduce */
 import Introduce from './pages/introduce/introduce';
+/* test */
+import Test from './pages/test/Test';
 /* tree */
 import Tree from './pages/tree/tree';
 /* line */
@@ -12,19 +14,17 @@ import Line from './pages/line/line';
 import Bar from './pages/bar/bar';
 /* pie */
 import Pie from './pages/pie/pie';
-/* svg图形 */
-import Svg from './pages/svgfirst/svgfirst';
 /* 3d */
 import Three from './pages/3d/3d';
 
 /* 模块 */
-const pages = [Introduce, Tree, Line, Bar, Pie, Svg, Three];
+const pages = [Introduce, Test, Line, Bar, Pie, Tree];
 
 /* 导航名称 */
-const navNames = ["introduce", "tree", "line", "bar", "pie", "svg", '3d'];
+const navNames = ["introduce", "test", "line", "bar", "pie", "tree"];
 
 /* paths */
-const paths = ["/", "/tree", "/line", "/bar", "/pie", "/svg", '/3d'];
+const paths = ['/introduce', '/test', '/line', '/bar', '/pie', '/tree'];
 
 class App extends Component {
   constructor() {
@@ -47,6 +47,7 @@ class App extends Component {
                 navNames.map((t, i) => {
                   return (
                     <li
+                      key={i}
                       className={active === i ? 'active' : ''}
                       key={`nav-name-item-${i}`}
                       onClick={me.navClick.bind(this, i)}
@@ -57,18 +58,24 @@ class App extends Component {
                 })
               }
             </ul>
-            <div className={'user'}></div>
           </div>
           {
             paths.map((t, i) => {
               let page = pages[i];
               if (i === 0)
                 return (
-                  <Route key={`route-item-${i}`} exact path={t} component={page} />
+                  <Route key={`route-item-${i}`}
+                    exact
+                    path={t}
+                    component={page}
+                  />
                 );
               else
                 return (
-                  <Route key={`route-item-${i}`} path={t} component={page} />
+                  <Route key={`route-item-${i}`}
+                    path={t}
+                    component={page}
+                  />
                 )
             })
           }
