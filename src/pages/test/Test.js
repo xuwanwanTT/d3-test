@@ -13,7 +13,7 @@ class Page extends Component {
     return (
       <div>
         <CanvasTest width={400} height={300} />
-        <StartBg />
+        <StartBg width={400} height={300} left={400} />
       </div>
     )
   }

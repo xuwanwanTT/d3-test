@@ -65,8 +65,16 @@ class Page extends React.Component {
   draw() {
     let me = this;
     let ball = me.ball;
-    me.ctx.fillStyle = 'rgba(102,51,153,0.3)';
+
+    // me.ctx.fillStyle = 'rgba(102,51,153,0.3)';
+    // me.ctx.fillRect(100, 0, 300, 300);
+
+    me.ctx.save();
+    me.ctx.globalCompositeOperation = "destination-in";
+    me.ctx.fillStyle = 'rgba(0,0,0,.8)';
     me.ctx.fillRect(100, 0, 300, 300);
+    me.ctx.restore();
+
     if (ball.y + ball.vy > me.refs.canvasRef.height - 25 || ball.y + ball.vy < 25) {
       ball.vy = -ball.vy;
       me.index = ~~(Math.random() * 3);
@@ -98,6 +106,7 @@ class Page extends React.Component {
       <div ref={'pageRef'}
         style={{
           position: 'absolute',
+          zIndex: 1,
           top: me.props.top,
           left: me.props.left
         }}>
