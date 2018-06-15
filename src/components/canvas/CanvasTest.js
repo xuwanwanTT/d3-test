@@ -10,6 +10,17 @@ class Page extends React.Component {
     this.raf = '';
   }
 
+  clear(ctx) {
+    const me = this;
+    // ctx.save();
+    // ctx.globalCompositeOperation = "destination-in";
+    // ctx.fillStyle = 'rgba(0,0,0,.8)';
+    // ctx.fillRect(0, 0, 400, 300);
+    // ctx.restore();
+
+    // window.requestAnimationFrame(me.clear.bind(me, ctx));
+  }
+
   componentDidMount() {
     const me = this;
     const ctx = me.refs.canvasRef.getContext('2d');
@@ -42,7 +53,7 @@ class Page extends React.Component {
     ctx.stroke(circle);
 
     me.ball.draw(ctx);
-
+    // me.clear(ctx);
   }
 
   ball = {
@@ -65,14 +76,17 @@ class Page extends React.Component {
   draw() {
     let me = this;
     let ball = me.ball;
+    let ctx = me.ctx;
+
+
 
     // me.ctx.fillStyle = 'rgba(102,51,153,0.3)';
     // me.ctx.fillRect(100, 0, 300, 300);
 
     me.ctx.save();
     me.ctx.globalCompositeOperation = "destination-in";
-    me.ctx.fillStyle = 'rgba(0,0,0,.8)';
-    me.ctx.fillRect(100, 0, 300, 300);
+    me.ctx.fillStyle = 'rgba(255,255,255,.8)';
+    me.ctx.fillRect(0, 0, 400, 300);
     me.ctx.restore();
 
     if (ball.y + ball.vy > me.refs.canvasRef.height - 25 || ball.y + ball.vy < 25) {
