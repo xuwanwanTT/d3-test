@@ -22,21 +22,24 @@ class Page extends Component {
     //箭头
     arrow(svg);
 
+    let xWidth = 250;
+    let yHeight = 200;
+
     //普通坐标轴--连续
     let yScale = d3.scaleLinear()
       .domain([0, 100]) //最大值
-      .range([250, 0]);  //画布最大值
+      .range([yHeight, 0]);  //画布最大值
     let xScale = d3.scaleLinear()
       .domain([0, 10])
-      .range([0, 200]);
+      .range([0, xWidth]);
     let xAxis = d3.axisBottom().scale(xScale);
     let yAxis = d3.axisLeft().scale(yScale);
     let axisA = svg.append('g');
     axisA.append('g')
-      .attr('transform', 'translate(100 300)')
+      // .attr('transform', 'translate(100 300)')
       .call(xAxis);
     axisA.append('g')
-      .attr('transform', 'translate(100 50)')
+      // .attr('transform', 'translate(100 50)')
       .call(yAxis);
 
     //x轴留白--非连续
@@ -66,7 +69,7 @@ class Page extends Component {
       .call(yAxisB);
     yB.select('path').attr('marker-end', 'url(#svg-arrow)');
 
-    console.log(yScaleB('柱子2'));
+    // console.log(yScaleB('柱子2'));
   }
 
   render() {

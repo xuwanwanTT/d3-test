@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import PieArea from '../../components/piechart/pie-area';
+import PieChart from '../../components/piechart/PieChart';
 
 class Pie extends Component {
   constructor() {
-    super()
+    super();
+    const me = this;
+    me.pieChart = {
+      width: 500,
+      height: 400,
+      position: 'absolute',
+      top: 90,
+      left: 400
+    };
   }
 
   render() {
@@ -11,6 +20,7 @@ class Pie extends Component {
     return (
       <div>
         <PieArea />
+        <PieChart style={me.pieChart} />
       </div>
     )
   }

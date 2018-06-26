@@ -96,7 +96,7 @@ class Pie extends Component {
     g.append('path')
       .attr('d', function (d, i) {
         if (i > 9) { return }
-        console.log(d)
+        // console.log(d)
         let start = -2 * PI / 3 + d * 2 * PI / 15;
         let end = start + 2 * PI / 15 - PI / 180;
         let path = me.createArc(r, R, d.start, d.end);

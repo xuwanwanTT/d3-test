@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@jusfoun-vis/common@^0.1.1":
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/@jusfoun-vis/common/download/@jusfoun-vis/common-0.1.1.tgz#dd364927ee9dbfeedde4bc2b396c38c723522e29"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/abab/download/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"

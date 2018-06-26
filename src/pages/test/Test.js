@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import CanvasTest from '../../components/canvas/CanvasTest';
 import StartBg from '../../components/canvas/StartBg';
 import Test from '../../components/canvas/Test';
-import Twinkle from '../../components/canvas/Twinkle';
+import Collision from '../../components/canvas/Collision';
+import SvgFirst from '../svgfirst/svgfirst';
 
 class Page extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class Page extends Component {
         {/* <CanvasTest width={400} height={300} /> */}
         {/* <StartBg width={400} height={300} left={400} /> */}
         {/* <Test /> */}
-        <Twinkle width={1920} height={1080} />
+        {/* <Collision width={800} height={600} /> */}
+        <SvgFirst />
       </div>
     )
   }

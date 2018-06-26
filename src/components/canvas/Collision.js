@@ -1,6 +1,6 @@
 import React from 'react';
-const color = 'rgba(38,177,217,.5)';
-const colorBg = 'rgba(38,177,217,.2)';
+
+const count = 50;
 
 class Star {
   _sx = 25;
@@ -11,7 +11,7 @@ class Star {
   _width = 100;
   _height = 100;
   _color = 'red';
-
+  _
   draw(ctx) {
     this.speed();
     ctx.save();
@@ -97,6 +97,14 @@ class Star {
   get color() {
     return this._color;
   }
+
+  set isIn(x) {
+    this._isIn = x;
+  }
+
+  get isIn() {
+    return this._isIn;
+  }
 };
 
 class Page extends React.Component {
@@ -111,8 +119,8 @@ class Page extends React.Component {
   twinkle(arr, ctx) {
     let me = this;
     ctx.clearRect(0, 0, me.width, me.height);
-    me.checkCollided(arr);
     me.draw(arr, ctx);
+    me.checkCollided(arr);
     window.requestAnimationFrame(me.twinkle.bind(me, arr, ctx));
   }
 
@@ -138,10 +146,13 @@ class Page extends React.Component {
     let vy1 = star1._vy;
     let vx2 = star2._vx;
     let vy2 = star2._vy;
+    let site11 = [star1._sx + vx1, star1._sy + vy1];
+    let site22 = [star2._sx + vx2, star2._sy + vy2];
+    if (!this.isCollision(site11, site22, r)) { return };
     if (this.isCollision(site1, site2, r)) {
       star1._vx = vx2;
-      star2._vx = vx1;
       star1._vy = vy2;
+      star2._vx = vx1;
       star2._vy = vy1;
     }
   }
@@ -187,7 +198,7 @@ class Page extends React.Component {
     me.width = me.props.width;
     me.height = me.props.height;
     const ctx = me.refs.canvasRef.getContext('2d');
-    const count = 500;
+
     let starArr = me.createMore(count, me.width, me.height);
     me.twinkle(starArr, ctx);
   }
