@@ -1,14 +1,13 @@
 import { createElementNS, SVG_NS, UiComponent } from '@jusfoun-vis/common';
 import * as d3 from 'd3';
+import uuid from 'uuid';
 
-const colorId = [
-  { name: 'svg-bar-h-xf-0', value: ['#ffff3b', '#fec710'] },
-  { name: 'svg-bar-h-xf-1', value: ['#00ffae', '#52fff1'] },
-  { name: 'svg-bar-h-xf-2', value: ['#0eb8ff', '#178aff'] },
-  { name: 'svg-bar-h-xf', value: ['#0acdfa', '#62d8ff'] },
+const color = [
+  ['#ffff3b', '#fec710'],
+  ['#00ffae', '#52fff1'],
+  ['#0eb8ff', '#178aff'],
+  ['#0acdfa', '#62d8ff'],
 ];
-const textColor = '#c5fdff';
-const lineColor = 'rgba(0,255,238,1)';
 
 class HorizontalBar extends UiComponent {
   constructor() {
@@ -16,7 +15,9 @@ class HorizontalBar extends UiComponent {
     const me = this;
     me._domElement = createElementNS(SVG_NS, 'svg');
     me._svg = d3.select(me._domElement);
-    me.data = [];
+    me._barH = 20;
+    me._tooltipH = 40;
+    me._tooltipL = 90;
   }
 
   get svg() {
@@ -54,6 +55,102 @@ class HorizontalBar extends UiComponent {
     return this._gride;
   }
 
+  set barH(value) {
+    this._barH = value;
+    this.updateSize();
+  }
+
+  get barH() {
+    return this._barH;
+  }
+
+  set unit(value) {
+    this._unit = value;
+    this.updateSize();
+  }
+
+  get unit() {
+    return this._unit;
+  }
+
+  set colorBg(value) {
+    this._colorBg = value;
+    this.updateSize();
+  }
+
+  get colorBg() {
+    return this._colorBg;
+  }
+
+  set colorText(value) {
+    this._colorText = value;
+    this.updateSize();
+  }
+
+  get colorText() {
+    return this._colorText;
+  }
+
+  set colorLine(value) {
+    this._colorLine = value;
+    this.updateSize();
+  }
+
+  get colorLine() {
+    return this._colorLine;
+  }
+
+  set colorBar(value) {
+    this._colorBar = value;
+    this.updateSize();
+  }
+
+  get colorBar() {
+    return this._colorBar;
+  }
+
+  set data(d) {
+    this.lock = true;
+    let dataY = [];
+    let countArr = [];
+    const len = d.length;
+    for (let i = 0; i < len; i++) {
+      dataY.push(d[i].name);
+      countArr.push(Number(d[i].value));
+    }
+    let max = Math.max.apply(null, countArr) + '';
+    let maxLen = max.length - 1;
+    if (maxLen == 0) { maxLen = 1; }
+    let dataX = [0, Number(max[0]) * Math.pow(10, maxLen)];
+    this._data = {
+      dataY,
+      dataX,
+      data: d
+    };
+  }
+
+  get data() {
+    return this._data;
+  }
+
+  set tooltopFont(value) {
+    this._tooltopFont = value;
+    this.updateSize();
+  }
+
+  get tooltopFont() {
+    return this._tooltopFont;
+  }
+
+  set textSize(value) {
+    this._textSize = value;
+    this.updateSize();
+  }
+
+  get textSize() {
+    return this._textSize;
+  }
+
   isUpdateSize = false;
 
   updateSize() {
@@ -81,40 +178,17 @@ class HorizontalBar extends UiComponent {
     }
   }
 
-  set data(d) {
-    this.lock = true;
-    let dataY = [];
-    let countArr = [];
-    const len = d.length;
-    for (let i = 0; i < len; i++) {
-      dataY.push(d[i].name);
-      countArr.push(Number(d[i].value));
-    }
-    let max = Math.max.apply(null, countArr) + '';
-    let maxLen = max.length - 1;
-    if (maxLen == 0) { maxLen = 1; }
-    let dataX = [0, Number(max[0]) * Math.pow(10, maxLen)];
-    this._data = {
-      dataY,
-      dataX,
-      data: d
-    };
-  }
-
-  get data() {
-    return this._data;
-  }
-
   draw() {
     const me = this;
-    me.setColor(me._svg, colorId);
+    let colorArr = me._colorBar || color
+    let colorId = me.setColor(me._svg, colorArr);
     let scale = me.drawAxis(me._svg, me._width, me._height, me._gride ? me._gride : []);
     let xScale = scale.x;
     let yScale = scale.y;
     let dx = scale.dx;
     let dy = scale.dy;
-    me.drawBar(me._svg, xScale, yScale, dx, dy, me._width, me._height);
-    me.tooltip = me.tooltip(me._svg, dx, dy, me._height);
+    me.drawBar(me._svg, xScale, yScale, dx, dy, me._width, me._height, colorId);
+    me.tooltip = me.tooltip(me._svg);
   }
 
   // 坐标轴
@@ -133,7 +207,7 @@ class HorizontalBar extends UiComponent {
       .append('path')
       .attr('d', 'M0 -4 L10 0 L0 4 L 3 0')
       .attr('transform', 'rotate(90) translate(-3 .5)')
-      .style('fill', lineColor)
+      .style('fill', this._colorLine || 'rgba(0,255,238,1)')
       .style('stroke-width', 0);
 
     // x 轴
@@ -150,21 +224,22 @@ class HorizontalBar extends UiComponent {
     let x = axis.append('g')
       .attr('transform', `translate(${dx} ${height - dy})`)
       .call(xAxis);
-    x.select('path').attr('marker-end', 'url(#svg-arrow)').attr('stroke', lineColor);
-    x.selectAll('text').attr('font-size', 24).attr('fill', textColor);
+    x.select('path').attr('marker-end', 'url(#svg-arrow)').attr('stroke', this._colorLine || 'rgba(0,255,238,1)');
+    x.selectAll('text').attr('font-size', this._textSize).attr('fill', this._colorText || '#c5fdff');
 
     // y 轴
     let yScale = d3.scaleBand()
       .domain(dataY)
       .range([height - 2 * dy, 0]);
+    this.yStep = yScale.step();
     let yAxis = d3.axisLeft().scale(yScale)
       .tickSize(0)
       .tickPadding(12);
     let y = axis.append('g')
       .attr('transform', `translate(${dx} ${dy})`)
       .call(yAxis);
-    y.select('path').attr('marker-end', 'url(#svg-arrow)').attr('stroke', lineColor);
-    y.selectAll('text').attr('font-size', 24).attr('fill', textColor);
+    y.select('path').attr('marker-end', 'url(#svg-arrow)').attr('stroke', this._colorLine || 'rgba(0,255,238,1)');
+    y.selectAll('text').attr('font-size', this._textSize).attr('fill', this._colorText || '#c5fdff');
 
     return {
       x: xScale,
@@ -175,10 +250,11 @@ class HorizontalBar extends UiComponent {
   }
 
   // 柱子
-  drawBar(svg, x, y, dx, dy, width, height) {
+  drawBar(svg, x, y, dx, dy, width, height, id) {
     const me = this;
     let data = me.data.data;
     let len = data.length - 1;
+    let barh = me._barH;
     let g = svg.append('g')
       .attr('transform', `translate(${dx} ${height - dy})`);
     let bar = g.selectAll('g').data(data).enter()
@@ -187,27 +263,27 @@ class HorizontalBar extends UiComponent {
     // bar2 bg
     bar.append('path')
       .attr('d', function (d, i) {
-        let h = y(d.name) - (height - 3 * dy);
-        let l = x(90)
-        return `M1,${h} H${l} V${h - 20} H1`
+        let h = height - 2 * dy - (y(d.name) + me.yStep / 2);
+        let l = x(me.data.dataX[1])
+        return `M1,${-(h - barh / 2)} H${l} V${-(h + barh / 2)} H1`
       })
-      .style('fill', 'rgba(36,169,224,.3)');
+      .style('fill', me._colorBg || 'rgba(36,169,224,.3)');
 
     // bar1
     bar.append('path')
       .style('fill', function (d, i) {
         let index = len - i;
-        return `url(#${index > 2 ? colorId[3].name : colorId[index].name})`
+        return `url(#${index > (id.length - 2) ? id[id.length - 1] : id[index]})`
       })
       .style('cursor', 'pointer')
       .on('mouseover', function (d, i) {
-        let h = y(d.name) + dy - 5;
+        let h = y(d.name) + me.yStep / 2;
         let l = x(d.value) + dx;
         me.tooltip.transition()
           .duration(400)
           .attr('opacity', 1)
-          .attr('transform', `translate(${l - 70},${h})`);
-        me.tooltip.select('text').text(`${d.value}人`)
+          .attr('transform', `translate(${l - me._tooltipL},${h + me._tooltipH / 2})`);
+        me.tooltip.select('text').text(`${d.value + me._unit}`)
       })
       .on('mouseout', function (d, i) {
         me.tooltip.transition()
@@ -217,11 +293,11 @@ class HorizontalBar extends UiComponent {
       .transition()
       .duration(1000)
       .attrTween('d', function (d) {
-        let h = y(d.name) - (height - 3 * dy);
-        let l = x(d.value) - 10;
+        let h = height - 2 * dy - (y(d.name) + me.yStep / 2);
+        let l = x(d.value) - barh / 2;
         let i = d3.interpolate(0, l);
         return function (t) {
-          return `M1,${h} H${i(t)} A10,10 0 1,0 ${i(t)},${h - 20} H1`;
+          return `M1,${-(h - barh / 2)} H${i(t)} A${barh / 2},${barh / 2} 0 1,0 ${i(t)},${-(h + barh / 2)} H1`;
         }
       });
   }
@@ -229,12 +305,11 @@ class HorizontalBar extends UiComponent {
   // 渐变
   setColor(svg, arr) {
     const me = this;
-    arr.forEach((s, i) => {
-      me.colorX(svg, s.name, s.value);
-    });
+    return arr.map(s => { return me.colorX(svg, s) });
   }
 
-  colorX(svg, id, color) {
+  colorX(svg, color) {
+    let id = uuid.v1();
     let linear = svg.append('defs').append("linearGradient")
       .attr("id", id)
       .attr("x1", "0%")
@@ -246,6 +321,7 @@ class HorizontalBar extends UiComponent {
         .attr("offset", 100 * i + '%')
         .style("stop-color", color[i]);
     }
+    return id;
   }
 
   showTooltip(type) {
@@ -254,23 +330,27 @@ class HorizontalBar extends UiComponent {
       .attr('opacity', type ? 1 : 0);
   }
 
-  tooltip(svg, dx, dy, height) {
+  tooltip(svg) {
     const me = this;
-    let h = 40;
-    let l = 70;
+    let h = me._tooltipH;
+    let l = me._tooltipL;
+    let tooltipFont = me._tooltopFont || {
+      fontSize: me._textSize,
+      color: '#fff'
+    };
     let tooltip = svg.append('g')
       .attr('opacity', 0)
       .attr('transform', `translate(0,-100)`);
     tooltip.append('path')
       .attr('d', `M0,0 H${l} V${h} H0 Z`)
       .attr('stroke-width', 3)
-      .attr('stroke', lineColor)
+      .attr('stroke', me._colorLine || 'rgba(0,255,238,1)')
       .attr('fill', 'rgba(29,32,136,.7)');
     tooltip.append('text')
       .attr('x', 10)
-      .attr('y', 30)
-      .attr('font-size', 24)
-      .attr('fill', '#fff')
+      .attr('y', tooltipFont.fontSize + (h - tooltipFont.fontSize - 3) / 2)
+      .attr('font-size', tooltipFont.fontSize)
+      .attr('fill', tooltipFont.color)
       .text('666');
     tooltip.on('mouseover', () => { me.showTooltip(1) })
       .on('mouseout', () => { me.showTooltip(0) });

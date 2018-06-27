@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import PieArea from '../../components/piechart/pie-area';
-import PieChart from '../../components/piechart/PieChart';
+// import PieArea from '../../components/piechart/pie-area';
+// import PieChart from '../../components/piechart/PieChart';
+import CirclePie from '../../components/piechart/CirclePie';
 
 class Pie extends Component {
   constructor() {
@@ -19,13 +20,21 @@ class Pie extends Component {
     let me = this;
     return (
       <div>
-        <PieArea />
-        <PieChart style={me.pieChart} />
+        {/* <PieArea /> */}
+        {/* <PieChart style={me.pieChart} /> */}
+        <div ref={'circlePieRef'} ></div>
       </div>
     )
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    const me = this;
+    const ref = me.refs;
+    let circlePie = new CirclePie();
+    circlePie.width = 500;
+    circlePie.height = 300;
+    ref.circlePieRef.appendChild(circlePie.domElement);
+  }
 };
 
 export default Pie;

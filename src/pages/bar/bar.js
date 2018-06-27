@@ -12,8 +12,8 @@ class Bar extends Component {
     let me = this;
     return (
       <div>
-        <BaseBar />
-        <ShapeBar />
+        {/* <BaseBar /> */}
+        {/* <ShapeBar /> */}
         <div ref={'horizonRef'} style={{}}></div>
       </div>
     )
@@ -23,8 +23,10 @@ class Bar extends Component {
     const me = this;
     const ref = me.refs;
     let barChart = new HorizontalBar();
-    barChart.width = 1600;
-    barChart.height = 700;
+    barChart.width = 600;
+    barChart.height = 400;
+    barChart.unit = '人';
+    barChart.textSize = 24;
     barChart.data = [
       { name: '大索道上部栈道03', value: 10 },
       { name: '高尔夫球场04', value: 20 },
@@ -35,7 +37,7 @@ class Bar extends Component {
       { name: '大索道上部栈道02', value: 60 },
       { name: '蓝月谷3号厕所1', value: 70 },
       { name: '临时停车场中部2', value: 80 },
-      { name: '大索道上部栈道013', value: 90 },
+      { name: '大索道上部栈道013', value: 100 },
     ];
     ref.horizonRef.appendChild(barChart.domElement);
   }
