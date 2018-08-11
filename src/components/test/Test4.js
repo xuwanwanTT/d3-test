@@ -1,4 +1,5 @@
 import React from 'react';
+import Hls from 'hls.js';
 
 const list = [
   'http://172.16.144.12:8033/movies202/202.m3u8',
@@ -12,6 +13,7 @@ class Page extends React.Component {
   }
 
   componentDidMount() {
+    const me = this;
     this.options = {
       width: '560',
       height: '460',
